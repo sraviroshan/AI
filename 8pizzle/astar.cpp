@@ -19,11 +19,14 @@ void astar_algo(node* start,node* goal){
 		print_vec(q->id);
 		if(q==goal){
 			cout << "found the goal" <<endl;
-			return;
+			//return;
+			cout<<endl<<"s"<<endl;
 			print_vec(q->id);
 			cout<<endl;
 			while(q->parent!=NULL){
 				print_vec((q->parent)->id);
+				q = q->parent;
+				cout<<endl;
 			}
 			return;
 		}
@@ -51,6 +54,7 @@ void astar_algo(node* start,node* goal){
 						node * n = (*iterator);
 						openset.erase(n);
 						n->g_val = tmp;
+						n->parent = q;
 						openset.insert(n);	
 					}
 				}
@@ -62,6 +66,7 @@ void astar_algo(node* start,node* goal){
 						node * n = (*iterator);
 						n->g_val = tmp;
 						n->state =1;
+						n->parent = q;
 						openset.insert(n);
 					}
 				}	
