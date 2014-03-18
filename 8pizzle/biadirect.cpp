@@ -182,5 +182,6 @@ int main(){
 
 	cout << "Size of graph discovered " << mymap.size() <<endl;
 	cout << "Size of graph discovered " << mymap_e.size() <<endl;
+	cout<<"no of different node "<<count_diff_node()<<endl;
 	return 0;
 }

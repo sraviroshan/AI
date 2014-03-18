@@ -471,5 +471,21 @@ list<node*> get_neighbour_puzzle_e(node* b){
 	return mylist;
 
 }
-
-
+//count different node in map
+int count_diff_node(){
+	int count=0;
+	unordered_map<string,node*>::const_iterator it;
+	for(it = mymap.begin(); it!=mymap.end(); it++)
+	{
+		if(check_hashmap_e((*it).first).tval)
+		{
+			check_hashmap_e((*it).first).n->state=5;
+		}
+		else count++;
+	}
+	for(it=mymap_e.begin(); it!=mymap_e.end();it++)
+	{
+		if((*it).second->state!=5) count++;
+	}
+	return count;
+}
