@@ -5,13 +5,13 @@ list<node*> close_list;
 
 
 
-void astar_algo(node* start,node* goal){
+void astar_algo(node* start,node* goal,node* start_e,node* goal_e){
 	
 	//open_list.push_back(start)
 	start->state= 1;
-	goal->state=1;
+	start_e->state=1;
 	openset.insert(start);
-	openset_e.insert(goal);
+	openset_e.insert(start_e);
 	list<node*> n_list;
 	list<node*> n_list_e;
 	while(!openset.empty() && !openset_e.empty()){
@@ -82,7 +82,7 @@ void astar_algo(node* start,node* goal){
 				{
 					(*iterator)->parent = q;
 					(*iterator)->g_val = q->g_val + adj_dist();
-					(*iterator)->h_val = heuristic_puzzle(*iterator);
+					(*iterator)->h_val = heuristic_puzzle((*iterator), goal->id);
 					(*iterator)->state =1;
 					openset.insert((*iterator));
 				}
@@ -120,7 +120,7 @@ void astar_algo(node* start,node* goal){
 				{
 					(*iterator)->parent = q_e;
 					(*iterator)->g_val = q_e->g_val + adj_dist();
-					(*iterator)->h_val = heuristic_puzzle(*iterator);
+					(*iterator)->h_val = heuristic_puzzle((*iterator),goal_e->id);
 					(*iterator)->state =1;
 					openset_e.insert((*iterator));
 				}
@@ -161,6 +161,8 @@ int main(){
 	vector<vector<int> > start = {{1,2,3},{-1,8,6},{4,5,7}};
 	node* s = new node();
 	node* e = new node();
+	node* s_e = new node();
+	node* e_e = new node();
 
 	s->id = start;
 	list<node*> gn=  get_neighbour_puzzle(s);
@@ -170,15 +172,20 @@ int main(){
 	s->g_val = 0;
 	e->h_val = 0;
 	s->parent = NULL;
-	s->h_val = heuristic_puzzle(s);
+	s->h_val = heuristic_puzzle(s,e->id);
 
+	s_e->id = final;
+	e_e->id = start;
+	s_e->g_val=0;
+	e_e->h_val=0;
+	s_e->h_val= heuristic_puzzle(s_e,e_e->id);
 	mymap[hash_key_n(s)] = s;
 	mymap[hash_key_n(e)] = e;
-	mymap_e[hash_key_n(s)] = s;
-	mymap_e[hash_key_n(e)] = e;
+	mymap_e[hash_key_n(s_e)] = s_e;
+	mymap_e[hash_key_n(e_e)] = e_e;
 
 
-	astar_algo(s,e);
+	astar_algo(s,e,s_e,e_e);
 
 	cout << "Size of graph discovered " << mymap.size() <<endl;
 	cout << "Size of graph discovered " << mymap_e.size() <<endl;
