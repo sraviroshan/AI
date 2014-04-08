@@ -1,0 +1,7 @@
+Contains Backpropagation code for - 
+XOR
+NAND
+Five input majority
+Five input palindrome
+Five input parity
+Seven Segment Display				(no of layers -> 2 (7, 10) ; learning rate -> .9 ; momentum -> .2 ; threshold -> .02)

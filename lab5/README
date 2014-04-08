@@ -1,0 +1,18 @@
+Contains code for Monks 1.
+
+No. of layers -> 3 (6, 7, 1)
+Learning Rate -> .1
+Threshold -> .03
+Momentum -> .7
+
+Max iterations -> 20000
+
+Accuracy ->
+1) 100%
+2) 100%
+3) 100%
+4) 100%
+5) 100%
+
+
+
