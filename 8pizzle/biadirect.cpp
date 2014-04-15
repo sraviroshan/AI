@@ -14,6 +14,8 @@ void astar_algo(node* start,node* goal,node* start_e,node* goal_e){
 	openset_e.insert(start_e);
 	list<node*> n_list;
 	list<node*> n_list_e;
+	int count =0;
+	int step_count =0;
 	while(!openset.empty() && !openset_e.empty()){
 		
 		node* q;
@@ -30,21 +32,26 @@ void astar_algo(node* start,node* goal,node* start_e,node* goal_e){
 			cout<<endl<<endl;
 			print_vec(q->id);
 			cout<<endl;
+			count++;
 			while(q->parent!=NULL){
 				print_vec((q->parent)->id);
 				q = q->parent;
 				cout<<endl;
+				count++;
 			}
 			cout<<"sssssssssss"<<endl;
 			node* n1 = check_hashmap_e(q_key).n;
 			print_vec(n1->id);
 			cout<<endl;
+			count++;
 			while(n1->parent!=NULL){
 				print_vec((n1->parent)->id);
 				n1 = n1->parent;
 				cout<<endl;
+				count++;
 			}
-
+			cout<<"count: "<<count-3<<endl;
+			cout<<"step count: "<<2*step_count<<endl;
 			return;
 		}
 		else if(check_hashmap(q_e_key).tval && check_hashmap(q_e_key).n->state==2)
@@ -53,25 +60,32 @@ void astar_algo(node* start,node* goal,node* start_e,node* goal_e){
 			cout<<endl<<endl;
 			print_vec(q_e->id);
 			cout<<endl;
+			count++;
 			while(q_e->parent!=NULL){
 				print_vec((q_e->parent)->id);
 				q_e = q_e->parent;
 				cout<<endl;
+				count++;
 			}
 			cout<<"sssssssssss"<<endl;
 			node* n1 = check_hashmap(q_e_key).n;
 			print_vec(n1->id);
 			cout<<endl;
+			count++;
 			while(n1->parent!=NULL){
 				print_vec((n1->parent)->id);
 				n1 = n1->parent;
 				cout<<endl;
-			}								
+				count++;
+			}
+			cout<<"count: "<<count-3<<endl;
+			cout<<"step count: "<<2*step_count<<endl;								
 			return;
 		}
 
 		else
 		{
+			step_count++;
 			//close_list.push_back(q);
 			//open_list.remove(q);
 			remove_setfront();
@@ -158,7 +172,7 @@ void astar_algo(node* start,node* goal,node* start_e,node* goal_e){
 int main(){
 	
 	vector<vector<int> > final = {{1,2,3},{4,5,6},{7,8,-1}};
-	vector<vector<int> > start = {{1,2,3},{-1,8,6},{4,5,7}};
+	vector<vector<int> > start = {{1,2,-1},{3,8,6},{4,5,7}};
 	node* s = new node();
 	node* e = new node();
 	node* s_e = new node();

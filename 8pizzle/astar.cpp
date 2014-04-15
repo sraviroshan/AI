@@ -11,6 +11,8 @@ void astar_algo(node* start,node* goal){
 	start->state= 1;
 	openset.insert(start);
 	list<node*> n_list;
+	int count=0;
+	int step_count =0;
 	while(!openset.empty()){
 		
 		node* q;
@@ -23,15 +25,20 @@ void astar_algo(node* start,node* goal){
 			cout<<endl<<"s"<<endl;
 			print_vec(q->id);
 			cout<<endl;
+			count++;
 			while(q->parent!=NULL){
 				print_vec((q->parent)->id);
 				q = q->parent;
 				cout<<endl;
+				count++;
 			}
+			cout<<"count: "<<count<<endl;
+			cout<<"step count: "<<step_count<<endl;
 			return;
 		}
 		else
 		{
+			step_count++;
 			//close_list.push_back(q);
 			//open_list.remove(q);
 			remove_setfront();
@@ -80,7 +87,8 @@ void astar_algo(node* start,node* goal){
 int main(){
 	
 	vector<vector<int> > final = {{1,2,3},{4,5,6},{7,8,-1}};
-	vector<vector<int> > start = {{1,2,3},{-1,8,6},{4,5,7}};
+	//vector<vector<int> > start = {{1,4,-1},{5,8,2},{7,3,6}};
+	vector<vector<int> > start = {{1,2,-1},{3,8,6},{4,5,7}};
 	node* s = new node();
 	node* e = new node();
 

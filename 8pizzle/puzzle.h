@@ -155,15 +155,20 @@ pair<int,int> find_pos(int n , vector<vector<int> > v){
 
 
 int heuristic_puzzle(node* n){
-	//return 0;
+	//return 1;
 	int sum =0;
 	pair<int,int> p1;
 	pair<int,int> p2;
 	for(int i=1;i<9;i++){
 		p1 = find_pos(i,n->id);
 		p2 = original_pos(i);
-		sum = sum + diff(p1,p2);	
+		sum = sum + diff(p1,p2) ;	
 	}
+	srand( time(0));
+	//random heuristic 
+	// int rande = rand() % (sum +1) ;
+	// cout<<"rand: "<< rande<<endl;
+	// return rande;
 	return sum;
 }
 
